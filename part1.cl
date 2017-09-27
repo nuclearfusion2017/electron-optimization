@@ -51,25 +51,25 @@ inline double4 get_accel(double4 pos, double4 v, float4* coils, int num_coils, f
 
 
 __kernel void compute_trajectory(
-	__global double4* positions,			//xyz, charge/mass
-	__global double4* velocities,		//xyz
-	__global float4* coils,
-  __global double* c_spheres,
-	__global float* ee_tab,
-	__global float* ek_tab,
-	__global float4* dest,
-  int4 sim_properties, // num_particles, num_steps, iter_nth, num_coils
-	 double dt
-	 ){
+	__global double4* positions,			// xyz, charge/mass
+	__global double4* velocities,			// xyz
+	__global float4* coils,				// z, radius, b0, rotation
+	__global double* c_spheres,			// space charge
+	__global float* ee_tab,				// first elliptic integral lookup table
+	__global float* ek_tab,				// second elliptic integral lookup table
+	__global float4* dest,				// output buffer
+	int4 sim_properties, 				// num_particles, num_steps, iter_nth, num_coils
+	double dt					// integration step size (s)
+){
 	unsigned int thread = get_global_id(0);
 
 	double4 pos = positions[thread];
 	double4 velo = velocities[thread];
-  double c_sphere = c_spheres[thread];
+	double c_sphere = c_spheres[thread];
 
-  unsigned int num_steps = sim_properties.y;
-  unsigned int iter_nth = sim_properties.z;
-  unsigned int num_coils = sim_properties.w;
+	unsigned int num_steps = sim_properties.y;
+	unsigned int iter_nth = sim_properties.z;
+	unsigned int num_coils = sim_properties.w;
 
 	double4 accel;
 
