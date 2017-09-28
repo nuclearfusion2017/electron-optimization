@@ -573,13 +573,6 @@ class all:
 
         #def generic_simulation(self, num_particles = 10000, steps = 9000000, egun_energy = 1000, coil_current = 5000, e_gun_z = -.03, c_charge = 0.0):
 
-
-#path_to_integrator = '/Users/jonkelley/Desktop/temp_potentia/potential_optimizer/part1.cl'
-#z.dim_by_dim()
-#z.single_sim()
-#z.EGUNvsDIST()
-#z.single_sim()
-
 import os
 script_path = os.path.abspath(__file__) # i.e. /path/to/dir/foobar.py
 script_dir = os.path.split(script_path)[0] #i.e. /path/to/dir/
